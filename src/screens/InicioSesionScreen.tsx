@@ -10,7 +10,8 @@ export const InicioSesionScreen = () => {
         placeholder='Correo Electrónico'
         placeholderTextColor="#a16207"
         autoCorrect = {false}
-        keyboardType='email-address'>
+        keyboardType='email-address'
+        autoCapitalize='none'>
         </TextInput>
 
         <TextInput style = {styles.inputs}

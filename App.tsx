@@ -6,8 +6,8 @@ import { RegistroScreen } from './src/screens/RegistroScreen';
 export const App = () => {
   return (
     <SafeAreaView style = {{flex: 1}}>
-      <InicioSesionScreen/>
-      {/* <RegistroScreen/> */}
+      {/* <InicioSesionScreen/> */}
+      <RegistroScreen/>
     </SafeAreaView>
   )
 }
