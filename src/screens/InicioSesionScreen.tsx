@@ -1,9 +1,11 @@
 import React from 'react'
-import { StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
+import { Image, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
 
 export const InicioSesionScreen = () => {
   return (
     <View style = {styles.contenedor}>
+        <Image style = {styles.logo}
+        source={require("../img/huella.png")}/>
         <Text style = {styles.titulo}> Iniciar Sessión</Text>
 
         <TextInput style = {styles.inputs}
@@ -79,5 +81,9 @@ const styles = StyleSheet.create({
         fontSize: 14,
         textDecorationLine: 'underline',
         paddingVertical: 20
+    },
+    logo:{
+        width: 180,
+        height: 180,
     }
 })

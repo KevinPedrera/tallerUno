@@ -1,9 +1,13 @@
 import React from 'react'
-import { Text, TextInput, TouchableOpacity, View, StyleSheet } from 'react-native'
+import { Text, TextInput, TouchableOpacity, View, StyleSheet, Image } from 'react-native'
 
 export const RegistroScreen = () => {
   return (
     <View style = {styles.contenedor}>
+
+        <Image style = {styles.logo}
+        source={require("../img/registro.png")}/>
+        
         <Text style = {styles.titulo}>Crear Cuenta</Text>
         
         <TextInput style = {styles.inputs}
@@ -108,6 +112,8 @@ const styles = StyleSheet.create({
     paddingVertical: 20
   },
 
-
-
+  logo:{
+    width:100,
+    height: 100
+  }
 })
