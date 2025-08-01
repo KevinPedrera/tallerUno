@@ -46,7 +46,7 @@ export const RegistroScreen = () => {
         </TouchableOpacity>
 
         <TouchableOpacity>
-            <Text>Ya tienes una cuenta? Inicia sesion</Text>
+            <Text>¿Ya tienes cuenta? Inicia sesión</Text>
         </TouchableOpacity>
     </View>
   )
