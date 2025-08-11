@@ -1,15 +1,14 @@
-import React from 'react'
-import { SafeAreaView, Text, View } from 'react-native';
-import { InicioSesionScreen } from './src/screens/InicioSesionScreen';
-import { RegistroScreen } from './src/screens/RegistroScreen';
+import 'react-native-gesture-handler';
+import React from 'react';
+import { NavigationContainer } from '@react-navigation/native';
+import { StackNavigator } from './src/navigator/StackNavigator';
 
 export const App = () => {
-  return (
-    <SafeAreaView style = {{flex: 1}}>
-      {/* <InicioSesionScreen/> */}
-      <RegistroScreen/>
-    </SafeAreaView>
-  )
+    return (
+        <NavigationContainer>
+            <StackNavigator />
+        </NavigationContainer>
+    )
 }
 
 export default App;

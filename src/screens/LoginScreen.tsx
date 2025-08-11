@@ -3,50 +3,33 @@ import {
   StatusBar, Text, View, Alert, StyleSheet, TouchableOpacity,
   Image, ScrollView, KeyboardAvoidingView, Platform
 } from 'react-native';
-import { PRIMARY_COLOR, FONT_SERIF, FONT_BODY } from '../theme/appTheme';
+import { PRIMARY_COLOR, FONT_SERIF, FONT_BODY, SECUNDARY_COLOR, TERTIARY_COLOR } from '../theme/appTheme';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { InputComponent } from '../components/InputComponent';
 import { ButtonComponent } from '../components/ButtonComponent';
 
-interface FormRegister {
-  name: string;
-  lastname: string;
-  email: string;
+interface FormLogin {
   username: string;
   password: string;
-  confirmPassword: string;
 }
 
-export const RegistroScreen = ({ navigation }: any) => {
-
-  const [formRegister, setFormRegister] = useState<FormRegister>({
-    name: '',
-    lastname: '',
-    email: '',
+export const LoginScreen = ({ navigation }: any) => {
+  const [formLogin, setFormLogin] = useState<FormLogin>({
     username: '',
-    password: '',
-    confirmPassword: ''
+    password: ''
   });
   const [hiddenPassword, setHiddenPassword] = useState<boolean>(true);
-  const [hiddenConfirmPassword, setHiddenConfirmPassword] = useState<boolean>(true); // Estado para el nuevo campo
 
-  const changeForm = (property: string, value: string) => {
-    setFormRegister({ ...formRegister, [property]: value });
+  const changeForm = (property: string, value: string): void => {
+    setFormLogin({ ...formLogin, [property]: value });
   }
 
-  const handleRegister = () => {
-
-    if (Object.values(formRegister).includes('')) {
+  const handleLogin = (): void => {
+    if (formLogin.username === '' || formLogin.password === '') {
       Alert.alert('Error', 'Por favor complete todos los campos');
       return;
     }
-    
-    if (formRegister.password !== formRegister.confirmPassword) {
-        Alert.alert('Error', 'Las contraseñas no coinciden');
-        return;
-    }
-
-    console.log('Registro exitoso:', formRegister);
+    console.log(formLogin)
   }
 
   return (
@@ -59,20 +42,21 @@ export const RegistroScreen = ({ navigation }: any) => {
 
         <View style={styles.logoContainer}>
             <Image
-                source={require('../img/registro.png')}
+                source={require('../img/logo.png')}
                 style={styles.logo}
             />
-            <Text style={styles.appName}>Crea tu Cuenta</Text>
+            <Text style={styles.appName}>PATITAS FELICES</Text>
         </View>
 
         <View style={styles.formContainer}>
-            <Text style={styles.titleWelcome}>Únete a la Comunidad</Text>
-            <Text style={styles.textDescription}>Es rápido y fácil</Text>
+            <Text style={styles.titleWelcome}>Bienvenido de Nuevo</Text>
+            <Text style={styles.textDescription}>Inicia sesión para continuar</Text>
             
-            <InputComponent placeholder='Nombre' keyboardType='default' changeForm={changeForm} property='name' />
-            <InputComponent placeholder='Apellido' keyboardType='default' changeForm={changeForm} property='lastname' />
-            <InputComponent placeholder='Correo electrónico' keyboardType='email-address' changeForm={changeForm} property='email' />
-            <InputComponent placeholder='Usuario' keyboardType='default' changeForm={changeForm} property='username' />
+            <InputComponent 
+                placeholder='Usuario'
+                keyboardType='default'
+                changeForm={changeForm}
+                property='username' />
             
             <View style={styles.passwordInputContainer}>
                 <InputComponent 
@@ -87,26 +71,12 @@ export const RegistroScreen = ({ navigation }: any) => {
                     style={styles.icon}
                     onPress={() => setHiddenPassword(!hiddenPassword)} />
             </View>
-
-            <View style={styles.passwordInputContainer}>
-                <InputComponent 
-                    placeholder='Confirmar Contraseña'
-                    keyboardType='default'
-                    changeForm={changeForm}
-                    property='confirmPassword'
-                    isPassword={hiddenConfirmPassword} />
-                <Icon name={hiddenConfirmPassword ? 'visibility' : 'visibility-off'}
-                    size={24}
-                    color={'#b45309'}
-                    style={styles.icon}
-                    onPress={() => setHiddenConfirmPassword(!hiddenConfirmPassword)} />
-            </View>
             
-            <ButtonComponent textButton='Registrarse' handleLogin={handleRegister} />
+            <ButtonComponent textButton='Iniciar Sesión' handleLogin={handleLogin} />
 
-            <TouchableOpacity style={styles.loginContainer} onPress={() => navigation.navigate('Login')}>
-                <Text style={styles.loginText}>¿Ya tienes una cuenta? </Text>
-                <Text style={[styles.loginText, styles.loginLink]}>Inicia Sesión</Text>
+            <TouchableOpacity style={styles.registerContainer} onPress={() => navigation.navigate('Register')}>
+                <Text style={styles.registerText}>¿No tienes una cuenta? </Text>
+                <Text style={[styles.registerText, styles.registerLink]}>Regístrate</Text>
             </TouchableOpacity>
         </View>
       </ScrollView>
@@ -125,24 +95,23 @@ const styles = StyleSheet.create({
     },
     logoContainer: {
         alignItems: 'center',
-        paddingTop: 40,
-        paddingBottom: 20,
+        paddingVertical: 40,
     },
     logo: {
-        width: 120,
-        height: 120,
+        width: 220,
+        height: 100,
         resizeMode: 'contain',
     },
     appName: {
         fontFamily: FONT_SERIF,
-        fontSize: 32,
+        fontSize: 30,
         fontWeight: '700',
         color: PRIMARY_COLOR,
         marginTop: 10,
     },
     formContainer: {
         flex: 1,
-        backgroundColor: '#FFFFFF',
+        backgroundColor: SECUNDARY_COLOR,
         borderTopLeftRadius: 40,
         borderTopRightRadius: 40,
         paddingHorizontal: 30,
@@ -162,7 +131,7 @@ const styles = StyleSheet.create({
         fontSize: 16,
         color: '#6c757d',
         textAlign: 'center',
-        marginBottom: 20,
+        marginBottom: 25,
         marginTop: 5,
     },
     passwordInputContainer: {
@@ -173,18 +142,18 @@ const styles = StyleSheet.create({
         position: 'absolute',
         right: 15,
     },
-    loginContainer: {
+    registerContainer: {
         flexDirection: 'row',
         justifyContent: 'center',
         alignItems: 'center',
         marginTop: 25,
     },
-    loginText: {
+    registerText: {
         fontFamily: FONT_BODY,
         color: '#6c757d',
         fontSize: 15,
     },
-    loginLink: {
+    registerLink: {
         color: PRIMARY_COLOR,
         fontWeight: 'bold',
     },
